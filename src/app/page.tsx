@@ -1,40 +1,59 @@
-import axios from "axios";
-import Image from "next/image";
+import Link from "next/link";
 
 const Home = async () => {
-  const list = await axios
-    .post(
-      "https://smartlib.mapo.go.kr:9525/api/book/getBookList?pageIdx=1&pageSize=15&smartlib=1&"
-    )
-    .then(({ data }) => {
-      console.log(data);
-      return data.SemaPsgudInfoEngInfo.row;
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-
   return (
-    <>
+    <div>
       <div
         style={{
           marginBottom: "16px",
         }}
       >
-        <h1 className="appTitle">서울 북마크</h1>
-        {/* {list.map((item: any) => {
-          return (
-            <Image
-              key={item.prdct_nm_korean}
-              src={item.thumb_image}
-              width={"100"}
-              height={"100"}
-              alt={item.prdct_nm_korean}
-            />
-          );
-        })} */}
+        <h1 className="appTitle">SEOUL BOOKMARK</h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Link
+            className="libraryLinkButton"
+            href={"/cityhall"}
+            style={{
+              background: "#ffe438",
+            }}
+          >
+            시청역 스마트 도서관
+          </Link>
+          <Link
+            className="libraryLinkButton"
+            href={"/dapsimni"}
+            style={{
+              background: "#1cd06d",
+            }}
+          >
+            답십리 스마트 도서관
+          </Link>
+          <Link
+            className="libraryLinkButton"
+            href={"/hapjeong"}
+            style={{
+              background: "#ee803f",
+            }}
+          >
+            합정역 스마트 도서관
+          </Link>
+          <Link
+            className="libraryLinkButton"
+            href={"/yongdu"}
+            style={{
+              background: "#7386fc",
+            }}
+          >
+            용두역 스마트 도서관
+          </Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
