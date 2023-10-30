@@ -4,7 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ["api.enicom.co.kr"],
+    domains: ["api.enicom.co.kr", "smart.l4d.or.kr", "img.libbook.co.kr"],
   },
 };
 
