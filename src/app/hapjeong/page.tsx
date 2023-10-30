@@ -1,3 +1,4 @@
+import { Header } from "../components/Header";
 import { BookList } from "./BookList";
 import { fetchBooktList } from "./fetchBooktList";
 
@@ -16,7 +17,7 @@ const HapjeongPage = async () => {
           marginBottom: "3rem",
         }}
       >
-        <h1 className="pageTitle">합정역 스마트 도서관</h1>
+        <Header title="합정역 스마트 도서관" />
         <p>위치: 합정역</p>
       </div>
       <BookList listData={listData} loadMore={loadMore} />

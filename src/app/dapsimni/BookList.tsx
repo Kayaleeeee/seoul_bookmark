@@ -5,6 +5,11 @@ import Image from "next/image";
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { useState } from "react";
 import { DapsimniBookType } from "../types/DapsimniBookType";
+import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
+import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
+import { Spacer } from "../components/Spacer";
+import { PictureBookListItem } from "../components/PictureBookListItem";
+import { TextBooktListItem } from "../components/TextBookListItem";
 
 type Props = {
   listData: {
@@ -26,6 +31,8 @@ export const BookList = ({ listData, loadMore }: Props) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const { listMode, onChangeListMode } = useListModeFilter();
+
   useInfiniteScroll({
     triggerElementId: "#trigger_container",
     containerElementId: "#list_container",
@@ -42,26 +49,45 @@ export const BookList = ({ listData, loadMore }: Props) => {
   });
 
   return (
-    <div
-      id="list_container"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "20px",
-      }}
-    >
-      {list.map((item) => {
-        return (
-          <div key={item.BOOK_ISBN} className="bookItem">
-            <Image
-              fill
-              src={`http://smart.l4d.or.kr:8091${item.BOOK_IMAGE_URL}`}
-              alt={item.BOOK_ISBN + " thumbnail"}
+    <>
+      <div
+        style={{
+          width: "100%",
+          display: "inline-flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <ListModeFilter
+          currentMode={listMode}
+          onChangeMode={onChangeListMode}
+        />
+      </div>
+      <Spacer space="15px" />
+
+      <div className={`bookListContainer-${listMode}`}>
+        {list.map((item, index) => {
+          if (listMode === "picture")
+            return (
+              <PictureBookListItem
+                key={`${item.BOOK_TITLE}_${index}`}
+                imageUrl={`http://smart.l4d.or.kr:8091${item.BOOK_IMAGE_URL}`}
+                title={item.BOOK_TITLE}
+                author={item.BOOK_AUTHOR}
+                isAvailable={item.BOOK_STATUS === "대출가능"}
+              />
+            );
+
+          return (
+            <TextBooktListItem
+              key={`${item.BOOK_TITLE}_${index}`}
+              isAvailable={item.BOOK_STATUS === "대출가능"}
+              title={item.BOOK_TITLE}
+              author={item.BOOK_AUTHOR}
             />
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       {pageNumber < listData.TotalCount && <div id="trigger_container" />}
-    </div>
+    </>
   );
 };

@@ -1,3 +1,4 @@
+import { Header } from "../components/Header";
 import { BookList } from "./BookList";
 import { fetchBooktList } from "./fetchBooktList";
 
@@ -16,8 +17,7 @@ const DapsimniPage = async () => {
           marginBottom: "3rem",
         }}
       >
-        <h1 className="pageTitle">답십리 스마트 도서관</h1>
-        {/* <p>위치: 합정역</p> */}
+        <Header title="답십리 스마트 도서관" />
       </div>
       <BookList listData={listData} loadMore={loadMore} />
     </div>
