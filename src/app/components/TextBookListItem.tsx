@@ -8,6 +8,7 @@ export const TextBooktListItem = ({ isAvailable, title, author }: Props) => {
   return (
     <div
       style={{
+        width: "100%",
         display: "inline-flex",
         justifyContent: "space-between",
         padding: "10px 16px",
