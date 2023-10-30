@@ -1,12 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Nanum_Myeongjo, Inter } from "next/font/google";
+import { Inter, Noto_Sans_KR } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const nanum_myeongjo = Nanum_Myeongjo({
+const noto_sans = Noto_Sans_KR({
   subsets: ["latin"],
-  weight: ["400", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={(inter.className, nanum_myeongjo.className)}>
+      <body className={(inter.className, noto_sans.className)}>
         <div className="appWrapper">
           <div className="appContentWrapper">{children}</div>
         </div>

@@ -88,3 +88,24 @@ body {
   height: 300px;
   background-color: #ffe438;
 }
+
+.bookListContainer-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookListContainer-picture {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 500px) {
+  .appTitle {
+    font-size: 3.5rem;
+  }
+
+  .libraryLinkButton {
+    font-size: 1.5rem;
+  }
+}
