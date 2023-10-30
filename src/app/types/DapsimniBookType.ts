@@ -6,7 +6,7 @@ export type DapsimniBookType = {
   BOOK_PUBLISHER: string;
   BOOK_PUBLISH_YEAR: string;
   BOOK_REG_NO: string;
-  BOOK_STATUS: string;
+  BOOK_STATUS: "대출가능" | "대출불가(대출중)";
   BOOK_TITLE: string;
   CATEGORY_ID: string;
   GROUP_ID: string;

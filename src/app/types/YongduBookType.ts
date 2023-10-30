@@ -10,7 +10,7 @@ export type YongduBookType = {
   loan_count: string;
   insert_date: string;
   state: string;
-  state_nm: "대출가능";
+  state_nm: "대출가능" | "대출중";
   user_key: string;
   loan_date: string;
   return_plan_date: string;
