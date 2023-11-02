@@ -1,13 +1,24 @@
+import axios from "axios";
 import { Header } from "../components/Header";
 import { BookList } from "./BookList";
-import { fetchBooktList } from "./fetchBooktList";
 
 const CityhallPage = async () => {
-  const listData = await fetchBooktList({ index: 1 });
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://steady-conkies-7a74ef.netlify.app";
+
+  const { data: listData } = await axios.post(`${url}/api/cityhall`, {
+    index: 1,
+  });
 
   const loadMore = async (index: number) => {
     "use server";
-    return await fetchBooktList({ index });
+
+    const { data } = await axios.post(`${url}/api/cityhall`, {
+      index,
+    });
+    return data;
   };
 
   return (
