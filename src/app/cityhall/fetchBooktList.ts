@@ -12,7 +12,7 @@ export const fetchBooktList = async (params: {
   category_nickname_key?: string;
 }) => {
   return axios
-    .get(`https://lib.seoul.go.kr/smartLibrary`)
+    .get(`https://lib.seoul.go.kr/smartLibrary?pn=${params.index}`)
     .then(async ({ data }) => {
       const html = data;
       const $ = cheerio.load(html);
