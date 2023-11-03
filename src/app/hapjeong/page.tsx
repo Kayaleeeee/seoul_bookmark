@@ -1,9 +1,10 @@
 import { Header } from "../components/Header";
 import { BookList } from "./BookList";
 import { fetchBooktList } from "./fetchBooktList";
+import { Test } from "./test";
 
 const HapjeongPage = async () => {
-  const listData = await fetchBooktList(1);
+  // const listData = await fetchBooktList(1);
 
   const loadMore = async (index: number) => {
     "use server";
@@ -20,7 +21,9 @@ const HapjeongPage = async () => {
         <Header title="합정역 스마트 도서관" />
         <p>위치: 합정역</p>
       </div>
-      <BookList listData={listData} loadMore={loadMore} />
+
+      <Test loadMore={loadMore} />
+      {/* <BookList listData={listData} loadMore={loadMore} /> */}
     </div>
   );
 };

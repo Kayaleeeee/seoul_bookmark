@@ -1,6 +1,5 @@
 import axios from "axios";
 import { HapjeongBookType } from "../types/HapjeongBookType";
-import { error } from "console";
 
 export const fetchBooktList = (index: number) => {
   return axios
