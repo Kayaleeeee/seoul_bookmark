@@ -1,23 +1,9 @@
-import axios from "axios";
 import { Header } from "../components/Header";
 import { BookList } from "./BookList";
+import { fetchBooktList } from "./fetchBooktList";
 
 const CityhallPage = async () => {
-  const loadMore = async (index: number) => {
-    "use server";
-
-    const url =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000"
-        : "https://steady-conkies-7a74ef.netlify.app";
-
-    const { data } = await axios.post(`${url}/api/cityhall`, {
-      index,
-    });
-    return data;
-  };
-
-  const listData = await loadMore(1);
+  const { data: listData } = await fetchBooktList({ index: 1 });
 
   return (
     <div>
@@ -28,7 +14,7 @@ const CityhallPage = async () => {
       >
         <Header title={"시청역 스마트 도서관"} />
       </div>
-      <BookList listData={listData} loadMore={loadMore} />
+      <BookList listData={listData} />
     </div>
   );
 };

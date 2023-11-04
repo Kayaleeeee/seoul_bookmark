@@ -8,6 +8,7 @@ import { PictureBookListItem } from "../components/PictureBookListItem";
 import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
 import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
 import { Spacer } from "../components/Spacer";
+import { fetchBooktList } from "./fetchBooktList";
 
 type Props = {
   listData: {
@@ -16,15 +17,9 @@ type Props = {
     TotalCount: number;
     TotalPage: number;
   };
-  loadMore: (index: number) => Promise<{
-    Page: number;
-    BookList: CityHallBookType[];
-    TotalCount: number;
-    TotalPage: number;
-  }>;
 };
 
-export const BookList = ({ listData, loadMore }: Props) => {
+export const BookList = ({ listData }: Props) => {
   const [list, setList] = useState<CityHallBookType[]>(listData.BookList);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,8 +36,8 @@ export const BookList = ({ listData, loadMore }: Props) => {
 
       setIsLoading(true);
 
-      const response = await loadMore(pageNumber + 1);
-      setList((prev) => prev.concat(response.BookList));
+      const { data } = await fetchBooktList({ index: pageNumber + 1 });
+      setList((prev) => prev.concat(data.BookList));
       setPageNumber((prev) => prev + 1);
       setIsLoading(false);
     },

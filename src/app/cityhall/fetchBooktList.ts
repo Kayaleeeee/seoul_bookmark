@@ -11,38 +11,5 @@ export const fetchBooktList = async (params: {
   index: number;
   category_nickname_key?: string;
 }) => {
-  return axios
-    .get(`https://lib.seoul.go.kr/smartLibrary?pn=${params.index}`)
-    .then(async ({ data }) => {
-      const html = data;
-      const $ = cheerio.load(html);
-      const totalCountMatch = $("p.totalCnt").text().match(/\d+/);
-      const totalCount = Number(totalCountMatch?.[0] || 0);
-
-      const currentPageMatch = $("p.pageNum > span").text();
-      const listItemCount = 100;
-      const listData: any[] | PromiseLike<any[]> = [];
-
-      $("tbody > tr").each((_, item) => {
-        const title = $(item).find(".title").text().trim();
-        const detailUrl = $(item).find("a").attr("href") || "";
-        const author = $(item).find("td.author").text();
-        const isAvailable = $(item).find("td.date").text();
-
-        listData.push({
-          title,
-          detailUrl,
-          author,
-          isAvailable: isAvailable === "대출가능",
-          imageUrl: null,
-        });
-      });
-
-      return {
-        BookList: listData,
-        TotalCount: totalCount,
-        TotalPage: Math.ceil(totalCount / listItemCount),
-        Page: Number(currentPageMatch) || 1,
-      };
-    });
+  return axios.post(`${process.env.api}/cityhall`, params);
 };
