@@ -9,6 +9,7 @@ import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
 import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
 import { Spacer } from "../components/Spacer";
 import { fetchBooktList } from "./fetchBooktList";
+import { Loader } from "../components/Loader/Loader";
 
 type Props = {
   listData: {
@@ -79,7 +80,17 @@ export const BookList = ({ listData }: Props) => {
             />
           );
         })}
-        {pageNumber < listData.TotalPage && <div id="trigger_container" />}
+        {pageNumber <= listData.TotalPage && !isLoading ? (
+          <div id="trigger_container" />
+        ) : (
+          <div
+            style={{
+              padding: "20px",
+            }}
+          >
+            <Loader />
+          </div>
+        )}
       </div>
     </>
   );

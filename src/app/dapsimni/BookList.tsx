@@ -9,6 +9,7 @@ import { Spacer } from "../components/Spacer";
 import { PictureBookListItem } from "../components/PictureBookListItem";
 import { TextBooktListItem } from "../components/TextBookListItem";
 import { fetchBooktList } from "./fetchBooktList";
+import { Loader } from "../components/Loader/Loader";
 
 type Props = {
   listData: {
@@ -31,6 +32,8 @@ export const BookList = ({ listData }: Props) => {
     containerElementId: "#list_container",
     onScroll: async () => {
       if (isLoading) return;
+
+      if (listData.TotalPage <= pageNumber) return;
 
       setIsLoading(true);
 
@@ -79,8 +82,18 @@ export const BookList = ({ listData }: Props) => {
             />
           );
         })}
+        {pageNumber <= listData.TotalCount && !isLoading ? (
+          <div id="trigger_container" />
+        ) : (
+          <div
+            style={{
+              padding: "20px",
+            }}
+          >
+            <Loader />
+          </div>
+        )}
       </div>
-      {pageNumber < listData.TotalCount && <div id="trigger_container" />}
     </>
   );
 };
