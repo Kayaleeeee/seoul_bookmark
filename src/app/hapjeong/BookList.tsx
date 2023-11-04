@@ -8,6 +8,7 @@ import { useListModeFilter } from "../components/ListModeFilter/useListModeFilte
 import { PictureBookListItem } from "../components/PictureBookListItem";
 import { TextBooktListItem } from "../components/TextBookListItem";
 import { Spacer } from "../components/Spacer";
+import { fetchBooktList } from "./fetchBooktList";
 
 type Props = {
   listData: {
@@ -17,16 +18,9 @@ type Props = {
     count: number;
     pageSize: number;
   };
-  loadMore: (index: number) => Promise<{
-    pageIdx: number;
-    data: HapjeongBookType[];
-    last_page: number;
-    count: number;
-    pageSize: number;
-  }>;
 };
 
-export const BookList = ({ listData, loadMore }: Props) => {
+export const BookList = ({ listData }: Props) => {
   const [list, setList] = useState<HapjeongBookType[]>(listData.data);
   const [pageNumber, setPageNumber] = useState<number>(listData.pageIdx);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,9 +35,9 @@ export const BookList = ({ listData, loadMore }: Props) => {
 
       setIsLoading(true);
 
-      const response = await loadMore(pageNumber + 1);
-      setList((prev) => prev.concat(response.data));
-      setPageNumber(response.pageIdx);
+      const { data } = await fetchBooktList({ index: pageNumber + 1 });
+      setList((prev) => prev.concat(data.data));
+      setPageNumber(data.pageIdx);
       setIsLoading(false);
     },
   });

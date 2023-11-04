@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { useState } from "react";
 import { DapsimniBookType } from "../types/DapsimniBookType";
@@ -10,6 +8,7 @@ import { useListModeFilter } from "../components/ListModeFilter/useListModeFilte
 import { Spacer } from "../components/Spacer";
 import { PictureBookListItem } from "../components/PictureBookListItem";
 import { TextBooktListItem } from "../components/TextBookListItem";
+import { fetchBooktList } from "./fetchBooktList";
 
 type Props = {
   listData: {
@@ -18,15 +17,9 @@ type Props = {
     TotalCount: number;
     TotalPage: number;
   };
-  loadMore: (index: number) => Promise<{
-    LoanPossibleBookCount: number;
-    BookList: DapsimniBookType[];
-    TotalCount: number;
-    TotalPage: number;
-  }>;
 };
 
-export const BookList = ({ listData, loadMore }: Props) => {
+export const BookList = ({ listData }: Props) => {
   const [list, setList] = useState<DapsimniBookType[]>(listData.BookList);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,8 +34,8 @@ export const BookList = ({ listData, loadMore }: Props) => {
 
       setIsLoading(true);
 
-      const response = await loadMore(pageNumber + 1);
-      setList((prev) => prev.concat(response.BookList));
+      const { data } = await fetchBooktList({ index: pageNumber + 1 });
+      setList((prev) => prev.concat(data.BookList));
       setPageNumber((prev) => prev + 1);
       setIsLoading(false);
     },

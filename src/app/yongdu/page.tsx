@@ -3,12 +3,7 @@ import { BookList } from "./BookList";
 import { fetchBooktList } from "./fetchBooktList";
 
 const YongduPage = async () => {
-  const listData = await fetchBooktList(1);
-
-  const loadMore = async (index: number) => {
-    "use server";
-    return await fetchBooktList(index);
-  };
+  const { data } = await fetchBooktList({ index: 1 });
 
   return (
     <div>
@@ -19,7 +14,7 @@ const YongduPage = async () => {
       >
         <Header title="용두역 스마트 도서관" />
       </div>
-      <BookList listData={listData} loadMore={loadMore} />
+      <BookList listData={data} />
     </div>
   );
 };

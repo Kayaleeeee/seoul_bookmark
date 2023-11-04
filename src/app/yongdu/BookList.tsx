@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { YongduBookType } from "../types/YongduBookType";
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { useState } from "react";
@@ -9,6 +8,7 @@ import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
 import { Spacer } from "../components/Spacer";
 import { TextBooktListItem } from "../components/TextBookListItem";
 import { PictureBookListItem } from "../components/PictureBookListItem";
+import { fetchBooktList } from "./fetchBooktList";
 
 type Props = {
   listData: {
@@ -18,16 +18,9 @@ type Props = {
     count: number;
     pageSize: number;
   };
-  loadMore: (index: number) => Promise<{
-    pageIdx: number;
-    data: YongduBookType[];
-    last_page: number;
-    count: number;
-    pageSize: number;
-  }>;
 };
 
-export const BookList = ({ listData, loadMore }: Props) => {
+export const BookList = ({ listData }: Props) => {
   const [list, setList] = useState<YongduBookType[]>(listData.data);
   const [pageNumber, setPageNumber] = useState<number>(listData.pageIdx);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,9 +35,9 @@ export const BookList = ({ listData, loadMore }: Props) => {
 
       setIsLoading(true);
 
-      const response = await loadMore(pageNumber + 1);
-      setList((prev) => prev.concat(response.data));
-      setPageNumber(response.pageIdx);
+      const { data } = await fetchBooktList({ index: pageNumber + 1 });
+      setList((prev) => prev.concat(data.data));
+      setPageNumber(data.pageIdx);
       setIsLoading(false);
     },
   });

@@ -1,15 +1,9 @@
 import { Header } from "../components/Header";
 import { BookList } from "./BookList";
 import { fetchBooktList } from "./fetchBooktList";
-import { Test } from "./test";
 
 const HapjeongPage = async () => {
-  // const listData = await fetchBooktList(1);
-
-  const loadMore = async (index: number) => {
-    "use server";
-    return await fetchBooktList(index);
-  };
+  const { data } = await fetchBooktList({ index: 1 });
 
   return (
     <div>
@@ -22,8 +16,7 @@ const HapjeongPage = async () => {
         <p>위치: 합정역</p>
       </div>
 
-      <Test loadMore={loadMore} />
-      {/* <BookList listData={listData} loadMore={loadMore} /> */}
+      <BookList listData={data} />
     </div>
   );
 };
