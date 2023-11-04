@@ -8,19 +8,6 @@ const CityhallPage = async () => {
       ? "http://localhost:3000"
       : "https://steady-conkies-7a74ef.netlify.app";
 
-  const { data: listData } = await axios.post(`${url}/api/cityhall`, {
-    index: 1,
-  });
-
-  const loadMore = async (index: number) => {
-    "use server";
-
-    const { data } = await axios.post(`${url}/api/cityhall`, {
-      index,
-    });
-    return data;
-  };
-
   return (
     <div>
       <div
@@ -30,7 +17,7 @@ const CityhallPage = async () => {
       >
         <Header title={"시청역 스마트 도서관"} />
       </div>
-      <BookList listData={listData} loadMore={loadMore} />
+      <BookList />
     </div>
   );
 };
