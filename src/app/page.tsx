@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { libraryList } from "./contants";
 
 const Home = async () => {
   return (
@@ -15,42 +16,20 @@ const Home = async () => {
             flexDirection: "column",
           }}
         >
-          <Link
-            className="libraryLinkButton"
-            href={"/cityhall"}
-            style={{
-              background: "#ffe438",
-            }}
-          >
-            시청역 스마트 도서관
-          </Link>
-          <Link
-            className="libraryLinkButton"
-            href={"/dapsimni"}
-            style={{
-              background: "#1cd06d",
-            }}
-          >
-            답십리 스마트 도서관
-          </Link>
-          <Link
-            className="libraryLinkButton"
-            href={"/hapjeong"}
-            style={{
-              background: "#ee803f",
-            }}
-          >
-            합정역 스마트 도서관
-          </Link>
-          <Link
-            className="libraryLinkButton"
-            href={"/yongdu"}
-            style={{
-              background: "#7386fc",
-            }}
-          >
-            용두역 스마트 도서관
-          </Link>
+          {Object.entries(libraryList).map(([key, value]) => {
+            return (
+              <Link
+                key={key}
+                className="libraryLinkButton"
+                href={value.path}
+                style={{
+                  background: value.color,
+                }}
+              >
+                {value.title}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>
