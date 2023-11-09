@@ -2,28 +2,54 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { PropsWithChildren } from "react";
 
 type Props = {
-  title: string;
+  color?: string;
 };
-export const Header = ({ title }: Props) => {
+
+export const Header = ({ color, ...props }: PropsWithChildren<Props>) => {
   const router = useRouter();
+
   return (
     <header
       style={{
-        display: "inline-flex",
-        alignItems: "center",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        position: "fixed",
+
+        top: 0,
+        left: 0,
+        transition: "background 0.3s",
       }}
     >
-      <div style={{ marginRight: "10px" }} onClick={router.back}>
-        <Image
-          src="/icon/chevron-left-100.png"
-          width={30}
-          height={30}
-          alt="left icon"
-        />
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "500px",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            padding: "10px",
+            backgroundColor: color,
+            display: "inline-flex",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ marginRight: "10px" }} onClick={router.back}>
+            <Image
+              src="/icon/chevron-left-100.png"
+              width={30}
+              height={30}
+              alt="left icon"
+            />
+          </div>
+          {props.children}
+        </div>
       </div>
-      <h2 className="pageTitle">{title}</h2>
     </header>
   );
 };
