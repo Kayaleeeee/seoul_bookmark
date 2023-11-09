@@ -1,0 +1,19 @@
+.searchBarContainer {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+}
+
+.searchInput {
+  height: 40px;
+  flex: 1;
+  border-radius: 6px;
+  outline: none;
+  padding: 0 10px;
+}
+
+.selectWrapper {
+  width: 100px;
+  display: flex;
+  margin-left: 10px;
+}
