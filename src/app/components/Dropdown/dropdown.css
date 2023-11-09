@@ -1,0 +1,27 @@
+.wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  border: 1px solid rgb(214, 214, 214);
+  background: white;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.itemListWrapper {
+  width: 100%;
+  border: 1px solid rgb(214, 214, 214);
+  background: white;
+  border-radius: 6px;
+  position: absolute;
+}
+
+.item {
+  padding: 10px 8px;
+  &:not(:last-child) {
+    border-bottom: 1px solid rgb(214, 214, 214);
+  }
+}
