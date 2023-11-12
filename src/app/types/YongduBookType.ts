@@ -15,3 +15,8 @@ export type YongduBookType = {
   loan_date: string;
   return_plan_date: string;
 };
+
+export enum BookStatus {
+  unavailable = 0,
+  avaliable = 1,
+}

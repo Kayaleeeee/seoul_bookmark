@@ -1,6 +1,6 @@
 "use client";
 
-import { YongduBookType } from "../types/YongduBookType";
+import { BookStatus, YongduBookType } from "../types/YongduBookType";
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { useState } from "react";
 import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
@@ -10,6 +10,27 @@ import { TextBooktListItem } from "../components/TextBookListItem";
 import { PictureBookListItem } from "../components/PictureBookListItem";
 import { fetchBooktList } from "./fetchBooktList";
 import { Loader } from "../components/Loader/Loader";
+import { Header } from "../components/Header";
+import { libraryList } from "../contants";
+import { scrollToTop } from "../utils/scrollToTop";
+import { DropdownItemType } from "../components/Dropdown/Dropdown";
+import { SearchFilterBar } from "../composition/SearchFilterBar/SearchFilterBar";
+import { useSearchFilterBar } from "../composition/SearchFilterBar/useSearchFilterBar";
+
+const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
+  {
+    label: "전체",
+    value: undefined,
+  },
+  {
+    label: "대출가능",
+    value: BookStatus.avaliable,
+  },
+  {
+    label: "대출중",
+    value: BookStatus.unavailable,
+  },
+];
 
 type Props = {
   listData: {
@@ -22,11 +43,56 @@ type Props = {
 };
 
 export const BookList = ({ listData }: Props) => {
+  const { color } = libraryList["yongdu"];
   const [list, setList] = useState<YongduBookType[]>(listData.data);
   const [pageNumber, setPageNumber] = useState<number>(listData.pageIdx);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { listMode, onChangeListMode } = useListModeFilter();
+
+  const { changeBookFilter, changeKeyword, keyword, bookStatusFilter } =
+    useSearchFilterBar<DropdownItemType<BookStatus | undefined>>(
+      bookFilterMenuList[0]
+    );
+
+  const fetchInitialPageWithParmas = async ({
+    bookStatus,
+    searchWord,
+  }: {
+    bookStatus?: BookStatus;
+    searchWord?: string;
+  }) => {
+    setIsLoading(true);
+
+    const { data } = await fetchBooktList({
+      index: 1,
+      bookStatus,
+      searchWord,
+    });
+
+    setList(data.data);
+    setPageNumber(data.pageIdx);
+    setIsLoading(false);
+
+    scrollToTop();
+  };
+
+  const changeBookStatusFilter = (
+    bookStatus: DropdownItemType<BookStatus | undefined>
+  ) => {
+    changeBookFilter(bookStatus);
+    fetchInitialPageWithParmas({
+      searchWord: keyword,
+      bookStatus: bookStatus.value,
+    });
+  };
+
+  const searchBooksearchWord = () => {
+    fetchInitialPageWithParmas({
+      searchWord: keyword,
+      bookStatus: bookStatusFilter.value,
+    });
+  };
 
   useInfiniteScroll({
     triggerElementId: "#trigger_container",
@@ -36,7 +102,11 @@ export const BookList = ({ listData }: Props) => {
 
       setIsLoading(true);
 
-      const { data } = await fetchBooktList({ index: pageNumber + 1 });
+      const { data } = await fetchBooktList({
+        index: pageNumber + 1,
+        bookStatus: bookStatusFilter?.value,
+        searchWord: keyword,
+      });
       setList((prev) => prev.concat(data.data));
       setPageNumber(data.pageIdx);
       setIsLoading(false);
@@ -45,6 +115,22 @@ export const BookList = ({ listData }: Props) => {
 
   return (
     <>
+      <div
+        style={{
+          height: "80px",
+        }}
+      >
+        <Header color={color}>
+          <SearchFilterBar<BookStatus | undefined>
+            onSearch={searchBooksearchWord}
+            onSelect={changeBookStatusFilter}
+            changeKeyword={changeKeyword}
+            keyword={keyword}
+            selectedFilter={bookStatusFilter}
+            menuList={bookFilterMenuList}
+          />
+        </Header>
+      </div>
       <div
         style={{
           width: "100%",
@@ -83,9 +169,7 @@ export const BookList = ({ listData }: Props) => {
         {pageNumber <= listData.last_page && !isLoading ? (
           <div id="trigger_container" />
         ) : (
-          <div style={{}}>
-            <Loader />
-          </div>
+          <Loader />
         )}
       </div>
     </>

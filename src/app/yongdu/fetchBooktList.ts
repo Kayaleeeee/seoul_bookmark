@@ -1,8 +1,10 @@
 import axios from "axios";
+import { BookStatus } from "../types/YongduBookType";
 
 export const fetchBooktList = (params: {
   index: number;
-  category_nickname_key?: string;
+  searchWord?: string;
+  bookStatus?: BookStatus;
 }) => {
   return axios.post(`${process.env.api}/youngdu`, params);
 };
