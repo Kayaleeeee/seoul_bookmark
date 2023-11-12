@@ -4,11 +4,7 @@ import { fetchBooktList } from "./fetchBooktList";
 const HapjeongPage = async () => {
   const { data } = await fetchBooktList({ index: 1 });
 
-  return (
-    <div>
-      <BookList listData={data} />
-    </div>
-  );
+  return <BookList listData={data} />;
 };
 
 export default HapjeongPage;

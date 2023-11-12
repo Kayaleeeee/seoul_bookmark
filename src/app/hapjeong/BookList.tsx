@@ -1,8 +1,8 @@
 "use client";
 
-import { HapjeongBookType } from "../types/HapjeongBookType";
+import { BookStatus, HapjeongBookType } from "../types/HapjeongBookType";
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
 import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
 import { PictureBookListItem } from "../components/PictureBookListItem";
@@ -10,12 +10,13 @@ import { TextBooktListItem } from "../components/TextBookListItem";
 import { Spacer } from "../components/Spacer";
 import { fetchBooktList } from "./fetchBooktList";
 import { Loader } from "../components/Loader/Loader";
-import { BookStatus } from "@/pages/api/hapjeong";
+
 import { Header } from "../components/Header";
 import { libraryList } from "../contants";
 import { SearchFilterBar } from "../composition/SearchFilterBar/SearchFilterBar";
 import { useSearchFilterBar } from "../composition/SearchFilterBar/useSearchFilterBar";
 import { DropdownItemType } from "../components/Dropdown/Dropdown";
+import { scrollToTop } from "../utils/scrollToTop";
 
 const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
   {
@@ -43,7 +44,7 @@ type Props = {
 };
 
 export const BookList = ({ listData }: Props) => {
-  const { title, color } = libraryList["hapjeong"];
+  const { color } = libraryList["hapjeong"];
 
   const [list, setList] = useState<HapjeongBookType[]>(listData.data);
   const [pageNumber, setPageNumber] = useState<number>(listData.pageIdx);
@@ -56,10 +57,6 @@ export const BookList = ({ listData }: Props) => {
     useSearchFilterBar<DropdownItemType<BookStatus | undefined>>(
       bookFilterMenuList[0]
     );
-
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
 
   const fetchInitialPageWithParmas = async ({
     bookStatus,
