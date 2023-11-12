@@ -6,7 +6,7 @@
 
 .searchInput {
   height: 40px;
-  flex: 1;
+  width: 80%;
   border-radius: 6px;
   outline: none;
   padding: 0 10px;
