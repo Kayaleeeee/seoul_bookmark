@@ -2,7 +2,7 @@
 
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { useState } from "react";
-import { DapsimniBookType } from "../types/DapsimniBookType";
+import { BookStatus, DapsimniBookType } from "../types/DapsimniBookType";
 import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
 import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
 import { Spacer } from "../components/Spacer";
@@ -10,6 +10,27 @@ import { PictureBookListItem } from "../components/PictureBookListItem";
 import { TextBooktListItem } from "../components/TextBookListItem";
 import { fetchBooktList } from "./fetchBooktList";
 import { Loader } from "../components/Loader/Loader";
+import { Header } from "../components/Header";
+import { libraryList } from "../contants";
+import { SearchFilterBar } from "../composition/SearchFilterBar/SearchFilterBar";
+import { DropdownItemType } from "../components/Dropdown/Dropdown";
+import { scrollToTop } from "../utils/scrollToTop";
+import { useSearchFilterBar } from "../composition/SearchFilterBar/useSearchFilterBar";
+
+const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
+  {
+    label: "전체",
+    value: undefined,
+  },
+  {
+    label: "대출가능",
+    value: BookStatus.avaliable,
+  },
+  {
+    label: "대출중",
+    value: BookStatus.unavailable,
+  },
+];
 
 type Props = {
   listData: {
@@ -21,11 +42,56 @@ type Props = {
 };
 
 export const BookList = ({ listData }: Props) => {
+  const { color } = libraryList["dapsimni"];
   const [list, setList] = useState<DapsimniBookType[]>(listData.BookList);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { listMode, onChangeListMode } = useListModeFilter();
+
+  const { changeBookFilter, changeKeyword, keyword, bookStatusFilter } =
+    useSearchFilterBar<DropdownItemType<BookStatus | undefined>>(
+      bookFilterMenuList[0]
+    );
+
+  const fetchInitialPageWithParmas = async ({
+    book_status,
+    keyword,
+  }: {
+    book_status?: BookStatus;
+    keyword?: string;
+  }) => {
+    setIsLoading(true);
+
+    const { data } = await fetchBooktList({
+      index: 1,
+      book_status,
+      keyword,
+    });
+
+    setList(data.BookList || []);
+    setPageNumber(1);
+    setIsLoading(false);
+
+    scrollToTop();
+  };
+
+  const changeBookStatusFilter = (
+    bookStatus: DropdownItemType<BookStatus | undefined>
+  ) => {
+    changeBookFilter(bookStatus);
+    fetchInitialPageWithParmas({
+      keyword: keyword,
+      book_status: bookStatus.value,
+    });
+  };
+
+  const searchBookKeyword = () => {
+    fetchInitialPageWithParmas({
+      keyword,
+      book_status: bookStatusFilter.value,
+    });
+  };
 
   useInfiniteScroll({
     triggerElementId: "#trigger_container",
@@ -37,7 +103,12 @@ export const BookList = ({ listData }: Props) => {
 
       setIsLoading(true);
 
-      const { data } = await fetchBooktList({ index: pageNumber + 1 });
+      const { data } = await fetchBooktList({
+        index: pageNumber + 1,
+        keyword,
+        book_status: bookStatusFilter.value,
+      });
+
       setList((prev) => prev.concat(data.BookList));
       setPageNumber((prev) => prev + 1);
       setIsLoading(false);
@@ -46,6 +117,22 @@ export const BookList = ({ listData }: Props) => {
 
   return (
     <>
+      <div
+        style={{
+          height: "80px",
+        }}
+      >
+        <Header color={color}>
+          <SearchFilterBar<BookStatus | undefined>
+            onSearch={searchBookKeyword}
+            onSelect={changeBookStatusFilter}
+            changeKeyword={changeKeyword}
+            keyword={keyword}
+            selectedFilter={bookStatusFilter}
+            menuList={bookFilterMenuList}
+          />
+        </Header>
+      </div>
       <div
         style={{
           width: "100%",
