@@ -1,5 +1,5 @@
-import { BookStatus } from "@/pages/api/hapjeong";
 import axios from "axios";
+import { BookStatus } from "../types/HapjeongBookType";
 
 export const fetchBooktList = (params: {
   index: number;
