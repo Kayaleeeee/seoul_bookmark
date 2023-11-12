@@ -2,11 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import { HapjeongBookType } from "@/app/types/HapjeongBookType";
 
-export enum BookStatus {
-  unavailable = 0,
-  avaliable = 1,
-}
-
 type ResponseData =
   | {
       pageIdx: number;
