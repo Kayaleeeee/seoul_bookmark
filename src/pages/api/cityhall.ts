@@ -34,15 +34,25 @@ export default async function handler(
           const title = $(item).find(".title").text().trim();
           const detailUrl = $(item).find("a").attr("href") || "";
           const author = $(item).find("td.author").text();
-          const isAvailable = $(item).find("td.date").text();
+          const bookStatus = $(item).find("td.date").text();
 
-          listData.push({
-            title,
-            detailUrl,
-            author,
-            isAvailable: isAvailable === "대출가능",
-            imageUrl: null,
-          });
+          if (!params.bookStatus) {
+            listData.push({
+              title,
+              detailUrl,
+              author,
+              isAvailable: bookStatus === "대출가능",
+              imageUrl: null,
+            });
+          } else if (params.bookStatus === bookStatus) {
+            listData.push({
+              title,
+              detailUrl,
+              author,
+              isAvailable: bookStatus === "대출가능",
+              imageUrl: null,
+            });
+          }
         });
 
         return {
