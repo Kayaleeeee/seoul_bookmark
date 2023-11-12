@@ -15,3 +15,8 @@ export type DapsimniBookType = {
   STATION_NAME: "답십리역스마트도서관";
   SUBJECT_DESC: string;
 };
+
+export enum BookStatus {
+  avaliable = 0,
+  unavailable = 1,
+}

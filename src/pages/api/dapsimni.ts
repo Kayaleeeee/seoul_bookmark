@@ -17,6 +17,7 @@ export default async function handler(
 ) {
   try {
     const params = req.body;
+
     const { data } = await axios.get<{
       LoanPossibleBookCount: number;
       BookList: DapsimniBookType[];
@@ -29,6 +30,8 @@ export default async function handler(
         page_count: 18,
         menu: "all",
         category_nickname_key: params.category_nickname_key || "all",
+        keyword: params.keyword,
+        book_status: params.book_status,
       },
     });
     res.status(200).json(data);
