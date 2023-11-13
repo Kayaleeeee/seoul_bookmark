@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { HapjeongBookType } from "@/app/types/HapjeongBookType";
+import { HapjeongBookListItemType } from "@/app/types/HapjeongBookType";
 
 type ResponseData =
   | {
       pageIdx: number;
-      data: HapjeongBookType[];
+      data: HapjeongBookListItemType[];
       last_page: number;
       count: number;
       pageSize: number;
@@ -43,7 +43,7 @@ export default async function handler(
       .post<{
         result: {
           pageIdx: number;
-          data: HapjeongBookType[];
+          data: HapjeongBookListItemType[];
           last_page: number;
           count: number;
           pageSize: number;

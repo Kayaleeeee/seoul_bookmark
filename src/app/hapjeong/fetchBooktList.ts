@@ -7,5 +7,5 @@ export const fetchBooktList = (params: {
   title?: string;
   category_nickname_key?: string;
 }) => {
-  return axios.post(`${process.env.api}/hapjeong`, params);
+  return axios.post(`${process.env.api}/hapjeong/list`, params);
 };
