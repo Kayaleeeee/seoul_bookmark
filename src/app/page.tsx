@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { libraryList } from "./contants";
 
-const Home = async () => {
+const Home = () => {
   return (
-    <div>
+    <div
+      style={{
+        padding: "16px",
+      }}
+    >
       <div
         style={{
           marginBottom: "16px",

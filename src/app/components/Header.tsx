@@ -18,10 +18,9 @@ export const Header = ({ color, ...props }: PropsWithChildren<Props>) => {
         display: "flex",
         justifyContent: "center",
         position: "fixed",
-
         top: 0,
         left: 0,
-        transition: "background 0.3s",
+        zIndex: 2,
       }}
     >
       <div
