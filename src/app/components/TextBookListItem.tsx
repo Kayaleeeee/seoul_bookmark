@@ -1,10 +1,19 @@
+import { BookStatusBadge } from "../composition/BookStatusBadge/BookStatusBadge";
+import { Spacer } from "./Spacer";
+
 type Props = {
   isAvailable: boolean;
   title: string;
   author: string;
+  onClick?: () => void;
 };
 
-export const TextBooktListItem = ({ isAvailable, title, author }: Props) => {
+export const TextBooktListItem = ({
+  isAvailable,
+  title,
+  author,
+  onClick,
+}: Props) => {
   return (
     <div
       style={{
@@ -17,6 +26,7 @@ export const TextBooktListItem = ({ isAvailable, title, author }: Props) => {
         marginBottom: "16px",
         minHeight: "90px",
       }}
+      onClick={onClick}
     >
       <div
         style={{
@@ -25,19 +35,8 @@ export const TextBooktListItem = ({ isAvailable, title, author }: Props) => {
           alignItems: "flex-start",
         }}
       >
-        <span
-          style={{
-            fontSize: "13px",
-            color: "white",
-            fontWeight: 500,
-            background: isAvailable ? "#1cd06d" : "black",
-            padding: "3px 10px",
-            borderRadius: 20,
-            marginBottom: "5px",
-          }}
-        >
-          {isAvailable ? "대출가능" : "대출불가"}
-        </span>
+        <BookStatusBadge isAvailable={isAvailable} />
+        <Spacer space="5px" />
         <div
           style={{
             fontWeight: 600,

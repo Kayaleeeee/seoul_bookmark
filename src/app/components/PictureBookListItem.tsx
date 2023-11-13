@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { BookStatusBadge } from "../composition/BookStatusBadge/BookStatusBadge";
 
 type Props = {
   title: string;
   author: string;
   imageUrl: string | undefined | null;
   isAvailable: boolean;
+  onClick?: () => void;
 };
 
 export const PictureBookListItem = ({
@@ -12,6 +14,7 @@ export const PictureBookListItem = ({
   title,
   author,
   isAvailable,
+  onClick,
 }: Props) => {
   return (
     <div
@@ -24,6 +27,7 @@ export const PictureBookListItem = ({
         boxShadow: "1px 4px 15px 0px rgba(196, 196, 196, 1)",
         borderRadius: 8,
       }}
+      onClick={onClick}
     >
       {!isAvailable && (
         <div
@@ -37,21 +41,15 @@ export const PictureBookListItem = ({
             zIndex: 1,
           }}
         >
-          <span
+          <div
             style={{
               position: "absolute",
               top: 10,
               left: 10,
-              fontSize: "13px",
-              color: "white",
-              fontWeight: 500,
-              background: "black",
-              padding: "3px 10px",
-              borderRadius: 20,
             }}
           >
-            대출불가
-          </span>
+            <BookStatusBadge isAvailable={false} />
+          </div>
         </div>
       )}
 
