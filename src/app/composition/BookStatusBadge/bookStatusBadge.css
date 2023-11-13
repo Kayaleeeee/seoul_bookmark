@@ -1,0 +1,15 @@
+.bookStatusBadge {
+  font-size: 13px;
+  color: white;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.available {
+  background: #1cd06d;
+}
+
+.unAvailable {
+  background: black;
+}
