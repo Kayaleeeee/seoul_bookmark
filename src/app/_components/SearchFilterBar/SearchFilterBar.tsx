@@ -1,4 +1,7 @@
-import { Dropdown, DropdownItemType } from "@/app/components/Dropdown/Dropdown";
+import {
+  Dropdown,
+  DropdownItemType,
+} from "@/app/_components/Dropdown/Dropdown";
 import "./searchFilterBar.css";
 
 type Props<T> = {

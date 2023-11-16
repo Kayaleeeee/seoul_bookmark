@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BookStatusBadge } from "../composition/BookStatusBadge/BookStatusBadge";
+import { BookStatusBadge } from "./BookStatusBadge/BookStatusBadge";
 
 type Props = {
   title: string;

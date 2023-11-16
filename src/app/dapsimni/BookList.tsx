@@ -3,19 +3,19 @@
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { useState } from "react";
 import { BookStatus, DapsimniBookType } from "../types/DapsimniBookType";
-import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
-import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
-import { Spacer } from "../components/Spacer";
-import { PictureBookListItem } from "../components/PictureBookListItem";
-import { TextBooktListItem } from "../components/TextBookListItem";
+import { ListModeFilter } from "../_components/ListModeFilter/ListModeFilter";
+import { useListModeFilter } from "../_components/ListModeFilter/useListModeFilter";
+import { Spacer } from "../_components/Spacer";
+import { PictureBookListItem } from "../_components/PictureBookListItem";
+import { TextBooktListItem } from "../_components/TextBookListItem";
 import { fetchBooktList } from "./fetchBooktList";
-import { Loader } from "../components/Loader/Loader";
-import { Header } from "../components/Header";
+import { Loader } from "../_components/Loader/Loader";
+import { Header } from "../_components/Header";
 import { libraryList } from "../contants";
-import { SearchFilterBar } from "../composition/SearchFilterBar/SearchFilterBar";
-import { DropdownItemType } from "../components/Dropdown/Dropdown";
+import { SearchFilterBar } from "../_components/SearchFilterBar/SearchFilterBar";
+import { DropdownItemType } from "../_components/Dropdown/Dropdown";
 import { scrollToTop } from "../utils/scrollToTop";
-import { useSearchFilterBar } from "../composition/SearchFilterBar/useSearchFilterBar";
+import { useSearchFilterBar } from "../_components/SearchFilterBar/useSearchFilterBar";
 
 const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
   {

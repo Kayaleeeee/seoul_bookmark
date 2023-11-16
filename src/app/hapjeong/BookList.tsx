@@ -1,22 +1,26 @@
 "use client";
 
-import { BookStatus, HapjeongBookType } from "../types/HapjeongBookType";
+import {
+  BookStatus,
+  HapjeongBookListItemType,
+} from "../types/HapjeongBookType";
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { useState } from "react";
-import { ListModeFilter } from "../components/ListModeFilter/ListModeFilter";
-import { useListModeFilter } from "../components/ListModeFilter/useListModeFilter";
-import { PictureBookListItem } from "../components/PictureBookListItem";
-import { TextBooktListItem } from "../components/TextBookListItem";
-import { Spacer } from "../components/Spacer";
+import { ListModeFilter } from "../_components/ListModeFilter/ListModeFilter";
+import { useListModeFilter } from "../_components/ListModeFilter/useListModeFilter";
+import { PictureBookListItem } from "../_components/PictureBookListItem";
+import { TextBooktListItem } from "../_components/TextBookListItem";
+import { Spacer } from "../_components/Spacer";
 import { fetchBooktList } from "./fetchBooktList";
-import { Loader } from "../components/Loader/Loader";
+import { Loader } from "../_components/Loader/Loader";
 
-import { Header } from "../components/Header";
+import { Header } from "../_components/Header";
 import { libraryList } from "../contants";
-import { SearchFilterBar } from "../composition/SearchFilterBar/SearchFilterBar";
-import { useSearchFilterBar } from "../composition/SearchFilterBar/useSearchFilterBar";
-import { DropdownItemType } from "../components/Dropdown/Dropdown";
+import { SearchFilterBar } from "../_components/SearchFilterBar/SearchFilterBar";
+import { useSearchFilterBar } from "../_components/SearchFilterBar/useSearchFilterBar";
+import { DropdownItemType } from "../_components/Dropdown/Dropdown";
 import { scrollToTop } from "../utils/scrollToTop";
+import { useRouter } from "next/navigation";
 
 const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
   {
@@ -36,7 +40,7 @@ const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
 type Props = {
   listData: {
     pageIdx: number;
-    data: HapjeongBookType[];
+    data: HapjeongBookListItemType[];
     last_page: number;
     count: number;
     pageSize: number;
@@ -44,9 +48,10 @@ type Props = {
 };
 
 export const BookList = ({ listData }: Props) => {
+  const router = useRouter();
   const { color } = libraryList["hapjeong"];
 
-  const [list, setList] = useState<HapjeongBookType[]>(listData.data);
+  const [list, setList] = useState<HapjeongBookListItemType[]>(listData.data);
   const [pageNumber, setPageNumber] = useState<number>(listData.pageIdx);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -57,6 +62,10 @@ export const BookList = ({ listData }: Props) => {
     useSearchFilterBar<DropdownItemType<BookStatus | undefined>>(
       bookFilterMenuList[0]
     );
+
+  const moveToDetailPage = (bookNumber: string, isbn: string) => {
+    router.push(`/hapjeong/${bookNumber}_${isbn}`);
+  };
 
   const fetchInitialPageWithParmas = async ({
     bookStatus,
@@ -120,7 +129,11 @@ export const BookList = ({ listData }: Props) => {
   });
 
   return (
-    <>
+    <div
+      style={{
+        padding: "16px",
+      }}
+    >
       <div
         style={{
           height: "80px",
@@ -162,6 +175,7 @@ export const BookList = ({ listData }: Props) => {
                 title={item.title}
                 author={item.author}
                 isAvailable={item.state_nm === "대출가능"}
+                onClick={() => moveToDetailPage(item.book_no, item.isbn)}
               />
             );
 
@@ -171,6 +185,7 @@ export const BookList = ({ listData }: Props) => {
               isAvailable={item.state_nm === "대출가능"}
               title={item.title}
               author={item.author}
+              onClick={() => moveToDetailPage(item.book_no, item.isbn)}
             />
           );
         })}
@@ -186,6 +201,6 @@ export const BookList = ({ listData }: Props) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };

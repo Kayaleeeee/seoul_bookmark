@@ -1,4 +1,4 @@
-import { BookStatusBadge } from "../composition/BookStatusBadge/BookStatusBadge";
+import { BookStatusBadge } from "./BookStatusBadge/BookStatusBadge";
 import { Spacer } from "./Spacer";
 
 type Props = {
