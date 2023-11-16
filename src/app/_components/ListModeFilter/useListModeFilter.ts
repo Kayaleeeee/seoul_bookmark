@@ -1,4 +1,4 @@
-import { ListModeType } from "@/app/types/ListTypeMode";
+import { ListModeType } from "@app/types/ListTypeMode";
 import { useState } from "react";
 
 export const useListModeFilter = (defaulMode?: ListModeType) => {

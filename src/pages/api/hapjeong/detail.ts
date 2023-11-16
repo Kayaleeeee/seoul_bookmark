@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { HapjeongBookDetailType } from "@/app/types/HapjeongBookType";
+import { HapjeongBookDetailType } from "@app/types/HapjeongBookType";
 
 type ResponseData =
   | {

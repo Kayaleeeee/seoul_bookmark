@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { DapsimniBookType } from "@/app/types/DapsimniBookType";
+import { DapsimniBookType } from "@app/types/DapsimniBookType";
 
 type ResponseData =
   | {

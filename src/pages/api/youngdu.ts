@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { YongduBookType } from "@/app/types/YongduBookType";
+import { YongduBookType } from "@app/types/YongduBookType";
 
 type ResponseData =
   | {
