@@ -129,11 +129,7 @@ export const BookList = ({ listData }: Props) => {
   });
 
   return (
-    <div
-      style={{
-        padding: "16px",
-      }}
-    >
+    <div className="p-4">
       <div
         style={{
           height: "80px",

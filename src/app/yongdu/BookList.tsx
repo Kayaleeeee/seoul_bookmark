@@ -115,11 +115,7 @@ export const BookList = ({ listData }: Props) => {
 
   return (
     <>
-      <div
-        style={{
-          height: "80px",
-        }}
-      >
+      <div className="p-4">
         <Header color={color}>
           <SearchFilterBar<BookStatus | undefined>
             onSearch={searchBooksearchWord}

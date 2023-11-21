@@ -24,96 +24,41 @@ const HapjeongDetailPage = async ({
         minHeight: "100vh",
       }}
     >
-      <div
-        style={{
-          height: "80px",
-        }}
-      >
+      <div className="h-20">
         <Header>
-          <div
-            style={{
-              height: "40px",
-            }}
-          ></div>
+          <Spacer space="40px" />
         </Header>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-        }}
-      >
+      <div className="flex justify-center relative">
         <div
+          className="rounded-lg shadow-md relative"
           style={{
-            position: "relative",
             width: "180px",
             height: "220px",
             zIndex: 2,
-            borderRadius: "16px",
-            boxShadow: "1px 2px 4px -1px rgba(89,78,78,0.5);",
           }}
         >
           <Image
+            className="rounded-lg"
             fill
-            style={{
-              borderRadius: "16px",
-            }}
             src={bookDetail.image_url}
             alt={"book thumbnail"}
             unoptimized
           />
         </div>
-        <div
-          style={{
-            width: "90%",
-            height: "calc(100vh - 280px)",
-            minHeight: "400px",
-
-            padding: "36px 24px 16px 24px",
-            background: "white",
-            position: "absolute",
-            top: "200px",
-            borderRadius: "20px 20px 0 0",
-            boxShadow: `0px 20px 21px 15px rgba(122,122,122,0.25)`,
-            overflowY: "scroll",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "1.3rem",
-              fontWeight: 500,
-              textAlign: "center",
-            }}
-          >
+        <div className="detailBookContent">
+          <div className="text-center text-xl font-medium">
             {bookDetail.title}
           </div>
           <Spacer space="1rem" />
 
-          <div
-            style={{
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: 500,
-              }}
-            >
-              {bookDetail.author}
-            </div>
+          <div className="text-center font-medium">
+            <div>{bookDetail.author}</div>
             <div>{bookDetail.publisher}</div>
           </div>
           <Spacer space="1rem" />
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+          <div className="flex justify-center">
             <BookStatusBadge isAvailable={bookDetail.state_nm !== "대출중"} />
           </div>
           <Spacer space="1rem" />

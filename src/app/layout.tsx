@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={(inter.className, noto_sans.className)}>
-        <div className="appWrapper">
+        <div className="appWrapper justify-center inline-flex">
           <div className="appContentWrapper">{children}</div>
         </div>
       </body>
