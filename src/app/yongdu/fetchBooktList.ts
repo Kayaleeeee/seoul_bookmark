@@ -6,5 +6,5 @@ export const fetchBooktList = (params: {
   searchWord?: string;
   bookStatus?: BookStatus;
 }) => {
-  return axios.post(`${process.env.api}/youngdu`, params);
+  return axios.post(`${process.env.api}/yongdu/list`, params);
 };
