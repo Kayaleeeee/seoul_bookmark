@@ -16,6 +16,7 @@ import { scrollToTop } from "../utils/scrollToTop";
 import { DropdownItemType } from "../_components/Dropdown/Dropdown";
 import { SearchFilterBar } from "../_components/SearchFilterBar/SearchFilterBar";
 import { useSearchFilterBar } from "../_components/SearchFilterBar/useSearchFilterBar";
+import { useRouter } from "next/navigation";
 
 const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
   {
@@ -44,6 +45,8 @@ type Props = {
 
 export const BookList = ({ listData }: Props) => {
   const { color } = libraryList["yongdu"];
+  const router = useRouter();
+
   const [list, setList] = useState<YongduBookType[]>(listData.data);
   const [pageNumber, setPageNumber] = useState<number>(listData.pageIdx);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,6 +57,10 @@ export const BookList = ({ listData }: Props) => {
     useSearchFilterBar<DropdownItemType<BookStatus | undefined>>(
       bookFilterMenuList[0]
     );
+
+  const moveToDetailPage = (bookNumber: string, isbn: string) => {
+    router.push(`/yongdu/${bookNumber}_${isbn}`);
+  };
 
   const fetchInitialPageWithParmas = async ({
     bookStatus,
@@ -114,8 +121,12 @@ export const BookList = ({ listData }: Props) => {
   });
 
   return (
-    <>
-      <div className="p-4">
+    <div className="p-4">
+      <div
+        style={{
+          height: "80px",
+        }}
+      >
         <Header color={color}>
           <SearchFilterBar<BookStatus | undefined>
             onSearch={searchBooksearchWord}
@@ -150,6 +161,7 @@ export const BookList = ({ listData }: Props) => {
                 title={item.title}
                 author={item.author}
                 isAvailable={item.state_nm === "대출가능"}
+                onClick={() => moveToDetailPage(item.book_no, item.isbn)}
               />
             );
 
@@ -159,6 +171,7 @@ export const BookList = ({ listData }: Props) => {
               title={item.title}
               author={item.author}
               isAvailable={item.state_nm === "대출가능"}
+              onClick={() => moveToDetailPage(item.book_no, item.isbn)}
             />
           );
         })}
@@ -168,6 +181,6 @@ export const BookList = ({ listData }: Props) => {
           <Loader />
         )}
       </div>
-    </>
+    </div>
   );
 };
