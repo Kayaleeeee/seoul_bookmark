@@ -116,8 +116,12 @@ export const BookList = ({ listData }: Props) => {
   });
 
   return (
-    <>
-      <div className="p-4">
+    <div className="p-4">
+      <div
+        style={{
+          height: "80px",
+        }}
+      >
         <Header color={color}>
           <SearchFilterBar<BookStatus | undefined>
             onSearch={searchBookKeyword}
@@ -177,6 +181,6 @@ export const BookList = ({ listData }: Props) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
