@@ -22,7 +22,7 @@ export function SearchFilterBar<T>({
     <div className="searchBarContainer">
       <input
         className="searchInput"
-        placeholder="검색할 책을 입력해주세요."
+        placeholder="책 제목을 입력해주세요."
         value={keyword}
         onChange={(e) => changeKeyword(e.target.value)}
         onKeyDown={(e) => {
