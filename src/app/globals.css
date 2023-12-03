@@ -100,12 +100,11 @@ body {
 
 .detailBookContent {
   position: absolute;
-  top: 200px;
-
+  top: 230px;
   width: 90%;
-  height: calc(100vh - 280px);
+  height: calc(100vh - 310px);
   min-height: 400px;
-  padding: 36px 24px 16px 24px;
+  padding: 46px 24px 16px 24px;
   background: #fff;
 
   border-radius: 20px 20px 0 0;
