@@ -5,5 +5,5 @@ export const fetchBooktList = async (params: {
   index: number;
   bookStatus?: BookStatus;
 }) => {
-  return axios.post(`${process.env.api}/cityhall`, params);
+  return axios.post(`${process.env.api}/cityhall/list`, params);
 };

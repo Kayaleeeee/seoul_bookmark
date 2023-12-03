@@ -16,6 +16,7 @@ import { DropdownItemType } from "../_components/Dropdown/Dropdown";
 import { scrollToTop } from "../utils/scrollToTop";
 import { useSearchFilterBar } from "../_components/SearchFilterBar/useSearchFilterBar";
 import { SearchFilterBar } from "../_components/SearchFilterBar/SearchFilterBar";
+import { useRouter } from "next/navigation";
 
 const bookFilterMenuList: DropdownItemType<BookStatus | undefined>[] = [
   {
@@ -42,6 +43,7 @@ type Props = {
 };
 
 export const BookList = ({ listData }: Props) => {
+  const router = useRouter();
   const { color } = libraryList["cityhall"];
 
   const [list, setList] = useState<CityHallBookType[]>(listData.BookList);
@@ -54,6 +56,10 @@ export const BookList = ({ listData }: Props) => {
     useSearchFilterBar<DropdownItemType<BookStatus | undefined>>(
       bookFilterMenuList[0]
     );
+
+  const moveToDetailPage = (bookNumber: string) => {
+    router.push(`/cityhall/${bookNumber}`);
+  };
 
   const fetchInitialPageWithParmas = async ({
     bookStatus,
@@ -153,6 +159,7 @@ export const BookList = ({ listData }: Props) => {
                 title={item.title}
                 author={item.author}
                 isAvailable={item.isAvailable}
+                onClick={() => moveToDetailPage(item.detailUrl)}
               />
             );
 
@@ -162,6 +169,7 @@ export const BookList = ({ listData }: Props) => {
               isAvailable={item.isAvailable}
               title={item.title}
               author={item.author}
+              onClick={() => moveToDetailPage(item.detailUrl)}
             />
           );
         })}
