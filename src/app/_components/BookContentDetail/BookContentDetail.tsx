@@ -31,7 +31,7 @@ export const BookContentDetail = ({
           className="rounded-lg shadow-md relative"
           style={{
             width: "180px",
-            height: "220px",
+            height: "250px",
             zIndex: 2,
           }}
         >
