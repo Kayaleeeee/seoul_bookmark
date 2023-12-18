@@ -20,11 +20,10 @@ export const TextBooktListItem = ({
         width: "100%",
         display: "inline-flex",
         justifyContent: "space-between",
-        padding: "10px 16px",
-        boxShadow: "1px 4px 10px 0px rgba(196, 196, 196, 1)",
-        borderRadius: "6px",
-        marginBottom: "16px",
+        padding: "16px",
+        borderBottom: "1px solid black",
         minHeight: "90px",
+        background: "#fff",
       }}
       onClick={onClick}
     >

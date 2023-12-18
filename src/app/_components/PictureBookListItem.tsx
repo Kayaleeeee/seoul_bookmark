@@ -24,8 +24,8 @@ export const PictureBookListItem = ({
         position: "relative",
         width: "100%",
         aspectRatio: "0.7",
-        boxShadow: "1px 4px 15px 0px rgba(196, 196, 196, 1)",
-        borderRadius: 8,
+        background: "#fff",
+        border: "1px solid black",
       }}
       onClick={onClick}
     >
@@ -36,7 +36,6 @@ export const PictureBookListItem = ({
             aspectRatio: "0.7",
             position: "absolute",
             top: 0,
-            borderRadius: 8,
             background: "rgba(0,0,0,0.4)",
             zIndex: 1,
           }}
@@ -54,14 +53,7 @@ export const PictureBookListItem = ({
       )}
 
       {imageUrl ? (
-        <Image
-          fill
-          src={imageUrl}
-          style={{
-            borderRadius: 8,
-          }}
-          alt={"book thumbnail"}
-        />
+        <Image fill src={imageUrl} alt={"book thumbnail"} />
       ) : (
         <div
           style={{
