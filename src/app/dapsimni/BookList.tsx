@@ -116,7 +116,7 @@ export const BookList = ({ listData }: Props) => {
   });
 
   return (
-    <div className="p-4">
+    <div>
       <div
         style={{
           height: "80px",
