@@ -50,7 +50,7 @@ export const withAuthHandler =
 
       const { data } = await getUserInfoByToken(accessTokenCookie);
 
-      return handler(req, res, data._id);
+      return handler(req, res, data.user._id);
     } catch (e) {
       return res.status(500).json({
         message: "서버 오류",
