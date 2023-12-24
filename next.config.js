@@ -15,11 +15,11 @@ const nextConfig = {
     domain:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
-        : "https://steady-conkies-7a74ef.netlify.app",
+        : "https://seoul-bookmark.netlify.app",
     api:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api"
-        : "https://steady-conkies-7a74ef.netlify.app/api",
+        : "https://seoul-bookmark.netlify.app/api",
   },
 };
 
