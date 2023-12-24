@@ -44,8 +44,6 @@ body {
   font-family: "inter";
   font-size: 5rem;
   font-weight: 800;
-  margin-bottom: 5rem;
-  margin-top: 2rem;
   line-height: 0.8;
 }
 
@@ -96,4 +94,11 @@ body {
   .libraryLinkButton {
     font-size: 1.5rem;
   }
+}
+
+.loginButtonWrapper {
+  position: relative;
+  height: 8%;
+  cursor: pointer;
+  margin-bottom: 5rem;
 }
