@@ -1,6 +1,6 @@
 import { verifyJwt } from "@app/lib/jwtAuth";
 import { cookies } from "next/headers";
-import { apiClient } from "./apiUtils";
+import { apiClient } from "../lib/api/apiClient";
 
 export const getAuthCookie = () => {
   const cookieStore = cookies();
