@@ -6,9 +6,14 @@ import { PropsWithChildren } from "react";
 
 type Props = {
   color?: string;
+  hasBackButton?: boolean;
 };
 
-export const Header = ({ color, ...props }: PropsWithChildren<Props>) => {
+export const Header = ({
+  color,
+  hasBackButton = true,
+  ...props
+}: PropsWithChildren<Props>) => {
   const router = useRouter();
 
   return (
@@ -32,20 +37,23 @@ export const Header = ({ color, ...props }: PropsWithChildren<Props>) => {
         <div
           style={{
             width: "100%",
+            minHeight: "60px",
             padding: "10px",
             backgroundColor: color,
             display: "inline-flex",
             alignItems: "center",
           }}
         >
-          <div style={{ marginRight: "10px" }} onClick={router.back}>
-            <Image
-              src="/icon/chevron-left-100.png"
-              width={30}
-              height={30}
-              alt="left icon"
-            />
-          </div>
+          {hasBackButton && (
+            <div style={{ marginRight: "10px" }} onClick={router.back}>
+              <Image
+                src="/icon/arrow-left.svg"
+                width={30}
+                height={30}
+                alt="left icon"
+              />
+            </div>
+          )}
           {props.children}
         </div>
       </div>
