@@ -73,6 +73,7 @@ export const BookList = ({ listData }: Props) => {
     const { data } = await fetchBooktList({
       index: 1,
       bookStatus,
+      bookTitle: keyword,
     });
 
     setList(data.BookList || []);
