@@ -42,7 +42,7 @@ export const withAuthHandler =
       }
 
       if (!isAuthenticated(accessTokenCookie)) {
-        res.setHeader("Set-Cookie", `Path=/; HttpOnly`);
+        res.setHeader("Set-Cookie", `accessToken=; Path=/; HttpOnly`);
         return res.status(403).json({
           message: "유효하지 않은 토큰입니다.",
         });
@@ -52,6 +52,7 @@ export const withAuthHandler =
 
       return handler(req, res, data.user._id);
     } catch (e) {
+      res.setHeader("Set-Cookie", `accessToken=; Path=/; HttpOnly`);
       return res.status(500).json({
         message: "서버 오류",
       });
