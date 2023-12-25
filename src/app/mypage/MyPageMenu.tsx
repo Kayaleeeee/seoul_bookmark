@@ -4,7 +4,7 @@ import { apiClient } from "@app/lib/api/apiClient";
 import { UserType } from "@app/types/Auth/UserType";
 import { BookType } from "@app/types/Bookmark/BookType";
 import { useRouter } from "next/navigation";
-
+import { toast } from "react-toastify";
 import { useCallback } from "react";
 
 type Props = {
@@ -20,6 +20,7 @@ export const MyPageMenu = ({ userInfo }: Props) => {
     try {
       await apiClient.post("/user/logout");
       router.replace("/");
+      toast.success("로그아웃 되었습니다.");
     } catch (e) {
       console.log(e);
     }
