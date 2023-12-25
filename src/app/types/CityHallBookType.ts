@@ -1,4 +1,5 @@
 export type CityHallBookType = {
+  id: string;
   title: string;
   detailUrl: string;
   author: string;
@@ -7,6 +8,7 @@ export type CityHallBookType = {
 };
 
 export type CityHallBookDetailType = {
+  id: string;
   author: string;
   title: string;
   publisher: string;
