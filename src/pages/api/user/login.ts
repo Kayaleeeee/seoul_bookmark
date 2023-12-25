@@ -1,7 +1,7 @@
 import dbConnect from "@app/lib/mongodb";
 
 import { NextApiRequest, NextApiResponse } from "next";
-import User from "../../../models/User/User";
+import User from "@model/User/User";
 import { issueJwtAccessToken } from "@app/lib/jwtAuth";
 
 export default async function handler(

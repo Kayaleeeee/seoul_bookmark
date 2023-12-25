@@ -22,6 +22,7 @@ export default async function handler(
           oAuthId: body.kakaoId.toString(),
           oAuthType: "kakao",
           ...tokens,
+          registeredAt: new Date().toISOString(),
         });
 
         if (!tokens) throw Error();

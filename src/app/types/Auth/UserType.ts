@@ -6,4 +6,5 @@ export type UserType = {
   oAuthId: string;
   accessToken: string;
   refreshToken: string;
+  registeredAt: string;
 };

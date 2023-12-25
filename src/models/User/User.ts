@@ -7,6 +7,7 @@ export interface User extends mongoose.Document {
   oAuthId: string;
   accessToken: string;
   refreshToken: string;
+  registeredAt: string;
 }
 
 const UserSchema = new mongoose.Schema<User>(
@@ -34,6 +35,10 @@ const UserSchema = new mongoose.Schema<User>(
     refreshToken: {
       type: String,
       required: [true, "Please provide a refreshToken for the user"],
+    },
+    registeredAt: {
+      type: String,
+      required: [true, "Please provide a registerdAt"],
     },
   },
   {
