@@ -23,12 +23,14 @@ const YongduDetailPage = async ({
       }}
     >
       <BookContentDetail
+        id={params.bookNumber.split("_")[0]}
         author={bookDetail.author}
         title={bookDetail.title}
         publisher={bookDetail.publisher}
         imageUrl={bookDetail.image_url}
         description={bookDetail.description}
         isAvailable={bookDetail.state_nm !== "대출중"}
+        location="용두"
       />
     </div>
   );
