@@ -8,6 +8,7 @@ export interface Bookmark extends mongoose.Document {
   location: string;
   userId: string;
   isAvailable?: boolean;
+  createdAt: string;
 }
 
 const Bookmark = new mongoose.Schema<Bookmark>(
@@ -37,6 +38,7 @@ const Bookmark = new mongoose.Schema<Bookmark>(
       required: [false],
     },
     userId: { type: String, required: [true, "UserId is required"] },
+    createdAt: { type: String, required: [true, "CreatedAt is required"] },
   },
   {
     collection: "bookmark",

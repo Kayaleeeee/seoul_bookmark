@@ -40,6 +40,7 @@ const handler = async (
         await Bookmark.create({
           ...req.body.book,
           userId,
+          createdAt: new Date().toISOString(),
         });
       } catch (e) {
         console.log(e);

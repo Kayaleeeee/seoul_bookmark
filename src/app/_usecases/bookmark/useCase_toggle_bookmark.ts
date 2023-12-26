@@ -1,6 +1,6 @@
 import { apiClient } from "@app/lib/api/apiClient";
 import { getIsLoginedFromClient } from "@app/lib/getIsLoginedFromClient";
-import { BookType } from "@app/types/Bookmark/BookType";
+import { BookMarkType } from "@app/types/Bookmark/BookMarkType";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ export const useCase_toggle_bookmark = (
   const router = useRouter();
 
   return useCallback(
-    async (book: BookType, isSaved: boolean) => {
+    async (book: BookMarkType, isSaved: boolean) => {
       const isLogined = await getIsLoginedFromClient();
 
       if (!isLogined) {
@@ -37,6 +37,6 @@ export const useCase_toggle_bookmark = (
         }
       }
     },
-    [setIsSaved]
+    [setIsSaved, router]
   );
 };

@@ -2,7 +2,7 @@
 
 import { apiClient } from "@app/lib/api/apiClient";
 import { UserType } from "@app/types/Auth/UserType";
-import { BookType } from "@app/types/Bookmark/BookType";
+import { BookMarkType } from "@app/types/Bookmark/BookMarkType";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useCallback } from "react";
@@ -10,7 +10,7 @@ import { useCallback } from "react";
 type Props = {
   userInfo: {
     user: UserType;
-    bookmark: BookType[];
+    bookmark: BookMarkType[];
   };
 };
 
@@ -34,7 +34,7 @@ export const MyPageMenu = ({ userInfo }: Props) => {
             title: "내 북마크",
             value: userInfo.bookmark.length,
           },
-          { title: "즐겨찾는 도서관", value: 10 },
+          // { title: "즐겨찾는 도서관", value: 10 },
         ].map((item, index) => {
           return (
             <div

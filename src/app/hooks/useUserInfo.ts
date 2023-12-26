@@ -1,5 +1,5 @@
 import { UserType } from "@app/types/Auth/UserType";
-import { BookType } from "@app/types/Bookmark/BookType";
+import { BookMarkType } from "@app/types/Bookmark/BookMarkType";
 import {
   getAuthCookie,
   getUserInfoByToken,
@@ -8,7 +8,7 @@ import {
 
 export const useUserInfo = async (): Promise<null | {
   user: UserType;
-  bookmark: BookType[];
+  bookmark: BookMarkType[];
 }> => {
   const authCookie = await getAuthCookie();
 
