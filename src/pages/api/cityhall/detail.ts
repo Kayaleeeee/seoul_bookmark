@@ -27,8 +27,8 @@ export default async function handler(
         const status = $(".footable-detail-show > p").text().trim();
         const imageUrl = $("#divCoverImage > img").attr("src");
 
-        console.log(imageUrl);
         return {
+          id: "booktestId",
           title,
           author,
           publisher,
