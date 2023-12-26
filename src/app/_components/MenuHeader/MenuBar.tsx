@@ -24,7 +24,7 @@ export const MenuBar = ({ closeMenu }: Props) => {
       return [
         { title: "홈", path: "/" },
         { title: "마이페이지", path: "/mypage" },
-        { title: "북마크", path: "/" },
+        { title: "북마크", path: "/bookmark" },
       ];
     }
     return [
