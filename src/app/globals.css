@@ -53,7 +53,13 @@ body {
   padding: 20px 24px;
   border-radius: 50px;
   display: flex;
+  flex-direction: row;
   align-items: center;
+}
+
+.libraryLinkButton:hover {
+  margin-left: 10px;
+  transition: all 0.5s;
 }
 
 .bookItem {
