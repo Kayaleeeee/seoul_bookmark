@@ -12,9 +12,14 @@ export const useCase_toggle_bookmark = (
 
   return useCallback(
     async (book: BookMarkType, isSaved: boolean) => {
-      const isLogined = await getIsLoginedFromClient();
+      try {
+        const isLogined = await getIsLoginedFromClient();
 
-      if (!isLogined) {
+        if (!isLogined) {
+          router.push("/login");
+          return;
+        }
+      } catch {
         router.push("/login");
         return;
       }
