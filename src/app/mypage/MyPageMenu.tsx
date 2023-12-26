@@ -24,7 +24,7 @@ export const MyPageMenu = ({ userInfo }: Props) => {
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex flex-1 flex-col justify-between">
@@ -34,7 +34,6 @@ export const MyPageMenu = ({ userInfo }: Props) => {
             title: "내 북마크",
             value: userInfo.bookmark.length,
           },
-          // { title: "즐겨찾는 도서관", value: 10 },
         ].map((item, index) => {
           return (
             <div
