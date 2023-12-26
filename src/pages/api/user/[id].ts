@@ -26,6 +26,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
             .json({ data: { user, bookmark: bookmarkList } });
         }
       } catch (e) {
+        console.log(e);
         res.status(500).json({
           message: "unexpected error",
         });
