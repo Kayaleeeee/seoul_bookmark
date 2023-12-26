@@ -9,7 +9,8 @@ const HapjeongDetailPage = async ({
   params: { bookNumber: string };
 }) => {
   const {
-    data: { bookDetail },
+    bookDetail: { bookDetail },
+    isSaved,
   } = await fetchBookDetail({
     book_no: params.bookNumber.split("_")[0],
     isbn: params.bookNumber.split("_")[1],
@@ -23,12 +24,15 @@ const HapjeongDetailPage = async ({
       }}
     >
       <BookContentDetail
+        id={params.bookNumber.split("_")[0]}
         author={bookDetail.author}
         title={bookDetail.title}
         publisher={bookDetail.publisher}
         imageUrl={bookDetail.image_url}
         description={bookDetail.description}
         isAvailable={bookDetail.state_nm !== "대출중"}
+        location="합정"
+        isSaved={isSaved}
       />
     </div>
   );
