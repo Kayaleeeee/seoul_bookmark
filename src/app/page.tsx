@@ -4,7 +4,7 @@ import { MenuHeader } from "./_components/MenuHeader/MenuHeader";
 
 const Home = () => {
   return (
-    <div className="flex flex-col p-4 h-full">
+    <div className="flex flex-col p-4 h-svh ">
       <MenuHeader hasGoBack={false} />
       <div className="flex flex-col grow mb-4 flex-1">
         <h1 className="appTitle my-16">SEOUL BOOKMARK</h1>

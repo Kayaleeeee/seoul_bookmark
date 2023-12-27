@@ -20,7 +20,7 @@ const HapjeongDetailPage = async ({
     <div
       style={{
         background: "pink",
-        minHeight: "100vh",
+        minHeight: "100svh",
       }}
     >
       <BookContentDetail

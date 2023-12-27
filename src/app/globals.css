@@ -33,7 +33,7 @@ body {
 .appContentWrapper {
   width: 100%;
   max-width: 500px;
-  min-height: 100vh;
+  min-height: 100svh;
   height: auto;
   background-color: #f1efe8;
   color: black;
