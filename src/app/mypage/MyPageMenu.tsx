@@ -33,12 +33,14 @@ export const MyPageMenu = ({ userInfo }: Props) => {
           {
             title: "내 북마크",
             value: userInfo.bookmark.length,
+            path: "/bookmark",
           },
         ].map((item, index) => {
           return (
             <div
               key={index}
               className={`flex-1 flex content-center justify-between py-5 px-1 mx-2 border-b-2 border-black `}
+              onClick={() => router.push(item.path)}
             >
               <div className="content-center">{item.title}</div>
               <div>{item.value}</div>
