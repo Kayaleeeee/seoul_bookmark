@@ -2,7 +2,7 @@ import dbConnect from "@app/lib/mongodb";
 
 import { NextApiRequest, NextApiResponse } from "next";
 import User from "../../../models/User/User";
-import { issueJwtAccessToken } from "@app/lib/jwtAuth";
+import { MAX_AGE, issueJwtAccessToken } from "@app/lib/jwtAuth";
 
 export default async function handler(
   req: NextApiRequest,
@@ -29,7 +29,7 @@ export default async function handler(
 
         res.setHeader(
           "Set-Cookie",
-          `accessToken=${tokens.accessToken}; Path=/; HttpOnly `
+          `accessToken=${tokens.accessToken}; Path=/; HttpOnly; Max-Age=${MAX_AGE}`
         );
         return res.status(200).json({ data: user });
       } catch (e) {

@@ -4,8 +4,10 @@ type SignOption = {
   expiresIn?: string | number;
 };
 
+export const MAX_AGE = 1209600;
+
 const DEFAULT_SIGN_OPTION: SignOption = {
-  expiresIn: "14 days",
+  expiresIn: MAX_AGE,
 };
 
 export const signJwtAccessToken = (
