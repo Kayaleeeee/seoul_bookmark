@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Seoul Bookmark
 
-## Getting Started
+[**Seoul Bookmark**](https://seoul-bookmark.netlify.app)는 
 
-First, run the development server:
+지하철역에 있는 스마트 도서관 책 저장소를 모아볼 수 있는 곳이다
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+스마트 도서관에 도착전에 무슨 책을 빌릴지 결정하고 싶은 마음 급한 사람들을 위한 서비스
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##
+### 주요 기술 스택
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **NextJS**
+    - App은 너무 무겁고, web site로 만들고자 함
+    - 스마트 도서관 도서목록은 정부에서 따로 API 제공하지 않아 도서관마다 페이지 구성이랑 데이터 구성이 제각각이다. Next Js API에서 cors를 피해서 크롤링 하고자함
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **MongoDB**
+    - 간단한 유저 정보와 북마크 정보를 저장하기 위해 몽고디비 사용 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
