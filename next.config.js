@@ -15,11 +15,11 @@ const nextConfig = {
     domain:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
-        : "https://seoul-bookmark.netlify.app",
+        : "https://seoul-bookmark.vercel.app",
     api:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api"
-        : "https://seoul-bookmark.netlify.app/api",
+        : "https://seoul-bookmark.vercel.app/api",
   },
 };
 
