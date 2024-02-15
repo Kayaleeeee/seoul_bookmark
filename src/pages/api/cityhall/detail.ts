@@ -34,11 +34,29 @@ const parseBookDeatil = async (url: string) => {
       }
     });
 
-    const status = document
-      .querySelector(".footable-detail-show > p")
-      ?.textContent?.trim();
+    let status;
 
-    return { imageUrl, title, author, id: isbn, publisher, status };
+    const rows: HTMLTableRowElement[] = Array.from(
+      document.querySelectorAll("tr.footable-detail-show")
+    );
+
+    rows.forEach((row) => {
+      if (row.innerText.includes("스마트도서관(시청역)")) {
+        const indexOfTd = Array.from(row.children).findIndex((td) =>
+          td.textContent?.includes("스마트도서관(시청역)")
+        );
+        status = row.children[indexOfTd + 1]?.textContent?.trim();
+      }
+    });
+
+    return {
+      imageUrl,
+      title,
+      author,
+      id: isbn,
+      publisher,
+      isAvailable: status !== "대출중",
+    };
   });
 
   await browser.close();
