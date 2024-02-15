@@ -49,7 +49,9 @@ export const BookContentDetail = ({
               height: "250px",
             }}
           >
-            <Image fill src={imageUrl} alt={"book thumbnail"} unoptimized />
+            {!!imageUrl && (
+              <Image fill src={imageUrl} alt={"book thumbnail"} unoptimized />
+            )}
           </div>
           <div className="px-3 py-2 border-l-2 border-black">
             <div className="text-xl font-medium mb-3">{title}</div>
