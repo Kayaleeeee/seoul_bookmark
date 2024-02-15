@@ -1,9 +1,50 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { CityHallBookDetailType } from "@app/types/CityHallBookType";
-import * as cheerio from "cheerio";
-import axios from "axios";
+
+const puppeteer = require("puppeteer");
+
 type ResponseData = { bookDetail: CityHallBookDetailType } | { error: string };
+
+const parseBookDeatil = async (url: string) => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(url);
+
+  const result = await page.evaluate(() => {
+    const imageUrl = (
+      document.querySelector("span#divCoverImage img") as HTMLImageElement
+    )?.src;
+
+    const title = document
+      .querySelector(".profileHeader > h3")
+      ?.textContent?.trim();
+    const author = document
+      .querySelector(".profileHeader > p")
+      ?.textContent?.trim();
+
+    let isbn, publisher;
+
+    document.querySelectorAll("th").forEach((th) => {
+      if (th.textContent?.includes("ISBN")) {
+        isbn = th.nextElementSibling?.textContent?.trim();
+      }
+      if (th.textContent?.includes("발행사항")) {
+        publisher = th.nextElementSibling?.textContent?.trim();
+      }
+    });
+
+    const status = document
+      .querySelector(".footable-detail-show > p")
+      ?.textContent?.trim();
+
+    return { imageUrl, title, author, id: isbn, publisher, status };
+  });
+
+  await browser.close();
+
+  return result;
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,32 +53,9 @@ export default async function handler(
   try {
     const params = req.body;
 
-    const result = await axios
-      .get(`https://lib.seoul.go.kr/search/detail/${params.book_no}`)
-      .then(async ({ data }) => {
-        const html = data;
-        const $ = cheerio.load(html);
-
-        const bookDetailPart = $(".detail-book");
-
-        const title = bookDetailPart.find(".profileHeader > h3").text().trim();
-        const author = bookDetailPart.find(".profileHeader > p").text().trim();
-        const isbn = $('th:contains("ISBN")').next().text().trim();
-        const publisher = $('th:contains("발행사항")').next().text().trim();
-        const status = $(".footable-detail-show > p").text().trim();
-        const imageUrl = $("#divCoverImage > img").attr("src");
-
-        return {
-          id: "booktestId",
-          title,
-          author,
-          publisher,
-          imageUrl: "",
-          //   imageUrl: `https://img.libbook.co.kr/V2/BookImgK7/${isbn}.gif`,
-          isAvailable: status !== "대출중",
-          description: "",
-        };
-      });
+    const result = await parseBookDeatil(
+      `https://lib.seoul.go.kr/search/detail/${params.book_no}`
+    );
 
     res.status(200).json({ bookDetail: result });
   } catch (err) {
