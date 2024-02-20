@@ -9,7 +9,7 @@ type ResponseData = { bookDetail: CityHallBookDetailType } | { error: string };
 const parseBookDeatil = async (url: string) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(url);
+  await page.goto(url, { timeout: 60000 });
 
   const result = await page.evaluate(() => {
     const imageUrl = (
@@ -75,8 +75,11 @@ export default async function handler(
       `https://lib.seoul.go.kr/search/detail/${params.book_no}`
     );
 
+    console.log(result);
     res.status(200).json({ bookDetail: result });
   } catch (err) {
-    res.status(500).json({ error: "API 에러 발생" });
+    console.log(err);
+    console.log(JSON.stringify(err));
+    // res.status(500).json({ error: "앵" });
   }
 }
